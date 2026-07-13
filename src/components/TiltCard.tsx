@@ -73,20 +73,20 @@ export default function TiltCard({
           rotateX,
           rotateY,
           transformStyle: "preserve-3d",
-          boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 12px 36px -12px rgba(0, 0, 0, 0.95)",
+          boxShadow: "var(--card-inset-shadow), var(--card-shadow)",
         }}
-        className="w-full h-full bg-[#0d0d0e]/95 border border-zinc-800/60 rounded-2xl transition-[background-color,border-color,box-shadow] duration-200 relative overflow-hidden"
+        className="w-full h-full bg-white dark:bg-[#0d0d0e]/95 border border-zinc-250 dark:border-zinc-800/60 rounded-2xl transition-[background-color,border-color,box-shadow] duration-200 relative overflow-hidden shadow-sm dark:shadow-none"
       >
         {/* Subtle, premium 3D glare overlay that glides across the card based on mouse direction */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none"
+          className="absolute inset-0 bg-gradient-to-tr from-transparent via-black/[0.01] dark:via-white/[0.03] to-transparent pointer-events-none"
           style={{
             transform: "translate3d(0, 0, 0)",
           }}
         />
 
         {/* Exact linear glare from the physical top-edge of the navbar container */}
-        <div className="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none z-20" />
+        <div className="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-black/[0.05] dark:via-white/10 to-transparent pointer-events-none z-20" />
 
         {/* Ambient glow follower on hover */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl pointer-events-none group-hover:bg-accent/10 transition-all duration-300" />

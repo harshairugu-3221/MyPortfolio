@@ -20,7 +20,7 @@ function LiquidMetalLink({ social, getSocialIcon }: LiquidMetalLinkProps) {
       rel="noopener noreferrer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative flex items-center justify-between p-4 border border-zinc-200 dark:border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-white/5 dark:bg-[#060606] shadow-sm cursor-pointer z-10 hover:border-zinc-400 dark:hover:border-zinc-500"
+      className="group relative flex items-center justify-between p-4 border border-zinc-200 dark:border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-white dark:bg-[#060606] shadow-sm cursor-pointer z-10 hover:border-zinc-400 dark:hover:border-zinc-500"
       id={`social-link-${social.name.toLowerCase()}`}
     >
       {/* Liquid Metal Backdrop Layer */}

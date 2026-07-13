@@ -230,13 +230,7 @@ const SectionDivider = () => (
 );
 
 export default function App() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) return savedTheme === "dark";
-    }
-    return true;
-  });
+  const isDarkMode = true;
 
   const [showIntro, setShowIntro] = useState(true);
   const [windowHeight, setWindowHeight] = useState(800);
@@ -246,14 +240,9 @@ export default function App() {
 
   useEffect(() => {
     const root = window.document.documentElement;
-    if (isDarkMode) {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDarkMode]);
+    root.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  }, []);
 
   // Measure window height dynamically for perfect scroll offset animations
   useEffect(() => {
@@ -331,7 +320,7 @@ export default function App() {
     rippleScale.set(0); // Smoothly decay back to resting state
   };
 
-  const toggleTheme = () => setIsDarkMode((prev) => !prev);
+  const toggleTheme = () => {};
 
   // HELLO letters array for staggered animations
   const helloLetters = ["H", "E", "L", "L", "O"];
@@ -550,7 +539,7 @@ export default function App() {
   const routeX = useTransform(scrollY, [fadeStart, fadeStart + 100], [-20, 0]);
 
   return (
-    <div className="relative min-h-screen w-full font-sans bg-black text-zinc-100 selection:bg-white selection:text-black">
+    <div className={`relative min-h-screen w-full font-sans ${isDarkMode ? "bg-black text-zinc-100 selection:bg-white selection:text-black" : "bg-white text-zinc-850 selection:bg-black selection:text-white"} transition-colors duration-500`}>
       
       {/* Soft, circular ambient light follower that trails the mouse movement across the screen */}
       <AmbientGlowFollower isDarkMode={isDarkMode} />
@@ -687,7 +676,7 @@ export default function App() {
             </motion.main>
 
             {/* Post-Home Container */}
-            <div ref={postHomeRef} className="relative w-full bg-[#131314] z-20">
+            <div ref={postHomeRef} className="relative w-full bg-white dark:bg-[#131314] text-zinc-800 dark:text-zinc-100 transition-colors duration-500 z-20">
               <SectionDivider />
 
             {/* About Section with Selected Experience & Core Expertise modules */}
@@ -718,7 +707,7 @@ export default function App() {
                   {/* Left Column: Headline and Bio Details stacked */}
                   <div className="order-2 md:order-1 md:col-span-7 xl:col-span-8 space-y-6 md:space-y-8">
                     <div className="space-y-4">
-                      <motion.h3 variants={staggerItem} className="font-sans font-extrabold text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl tracking-tight text-white leading-tight">
+                      <motion.h3 variants={staggerItem} className="font-sans font-extrabold text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl tracking-tight text-zinc-900 dark:text-white leading-tight">
                         Architecting robust solutions with clean code & dynamic design.
                       </motion.h3>
                       <motion.p variants={staggerItem} className="font-sans text-sm xl:text-base 2xl:text-lg text-accent/90 font-medium">
@@ -727,10 +716,10 @@ export default function App() {
                     </div>
 
                     <div className="space-y-4">
-                      <motion.p variants={staggerItem} className="font-sans text-base xl:text-lg 2xl:text-xl text-zinc-300 leading-relaxed font-light">
+                      <motion.p variants={staggerItem} className="font-sans text-base xl:text-lg 2xl:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
                         As a Full Stack Developer based in India, I specialize in building next-generation web and mobile applications. I bridge the gap between complex backend architectures and flawless user interfaces, ensuring that speed, responsiveness, and aesthetic precision coexist.
                       </motion.p>
-                      <motion.p variants={staggerItem} className="font-sans text-base xl:text-lg 2xl:text-xl text-zinc-300 leading-relaxed font-light">
+                      <motion.p variants={staggerItem} className="font-sans text-base xl:text-lg 2xl:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
                         With years of experience in system architecture, frontend frameworks, and cloud infrastructures, I build tools that solve real-world problems and leave lasting visual impressions.
                       </motion.p>
                     </div>
@@ -776,10 +765,10 @@ export default function App() {
                       <div className="flex items-center gap-3">
                         <span className="font-mono text-xs text-zinc-500">PROJECT OF TRANSFORMATION</span>
                       </div>
-                      <h3 className="font-sans font-extrabold text-2xl md:text-3xl xl:text-4xl text-white tracking-tight">
+                      <h3 className="font-sans font-extrabold text-2xl md:text-3xl xl:text-4xl text-zinc-900 dark:text-white tracking-tight">
                         NexCart Enterprise
                       </h3>
-                      <p className="font-sans text-sm xl:text-base text-zinc-400 leading-relaxed font-light">
+                      <p className="font-sans text-sm xl:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
                         A robust, enterprise-grade e-commerce system architected to solve multi-device cart conflicts and high-latency database queries. Designed to maintain lightning-fast response times even during peak traffic loads.
                       </p>
                       <div className="flex items-center gap-2 text-xs font-mono text-zinc-500">
@@ -808,17 +797,17 @@ export default function App() {
                         <div>
                           <div className="flex justify-between items-start mb-6">
                              <span className="font-mono text-[10px] xl:text-[11px] tracking-widest text-zinc-500 uppercase">E-Commerce // Web Platform</span>
-                             <span className="text-zinc-500 font-mono text-[10px] xl:text-[11px] bg-white/5 px-2 py-0.5 rounded-full border border-white/5">2026</span>
+                             <span className="text-zinc-500 font-mono text-[10px] xl:text-[11px] bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded-full border border-zinc-200 dark:border-white/5">2026</span>
                           </div>
-                          <h4 className="font-sans font-extrabold text-2xl xl:text-3xl 2xl:text-4xl text-white mb-3 group-hover:text-accent transition-colors duration-200">NexCart</h4>
-                          <p className="font-sans text-sm xl:text-base 2xl:text-lg text-zinc-400 leading-relaxed font-light mb-6">
+                          <h4 className="font-sans font-extrabold text-2xl xl:text-3xl 2xl:text-4xl text-zinc-900 dark:text-white mb-3 group-hover:text-accent transition-colors duration-200">NexCart</h4>
+                          <p className="font-sans text-sm xl:text-base 2xl:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light mb-6">
                             A high-performance full-stack e-commerce system featuring seamless shopping shopping cart sync, dynamic multi-attribute product filters, secure stripe payments, and automated shipping status telemetry.
                           </p>
                         </div>
                         <div>
                           <div className="flex flex-wrap gap-2 mb-6">
                              {['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Stripe'].map((tag) => (
-                              <span key={tag} className="font-mono text-[9px] xl:text-[10px] text-zinc-400 bg-white/[0.03] px-2 py-1 rounded border border-white/5">{tag}</span>
+                              <span key={tag} className="font-mono text-[9px] xl:text-[10px] text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-white/[0.03] px-2 py-1 rounded border border-zinc-200 dark:border-white/5">{tag}</span>
                             ))}
                           </div>
                           <button 
@@ -827,7 +816,7 @@ export default function App() {
                               const proj = PROJECTS.find(p => p.id === "nexcart");
                               if (proj) setSelectedProject(proj);
                             }}
-                            className="inline-flex items-center gap-2 font-sans text-xs xl:text-sm 2xl:text-base font-bold text-accent hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer text-left"
+                            className="inline-flex items-center gap-2 font-sans text-xs xl:text-sm 2xl:text-base font-bold text-zinc-800 dark:text-accent hover:text-zinc-950 dark:hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer text-left"
                           >
                             Explore Technical Solutions & Challenges
                             <svg className="w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -850,10 +839,10 @@ export default function App() {
                       <div className="flex items-center gap-3">
                         <span className="font-mono text-xs text-zinc-500">VOICE & AUDIO AUTOMATION</span>
                       </div>
-                      <h3 className="font-sans font-extrabold text-2xl md:text-3xl xl:text-4xl text-white tracking-tight">
+                      <h3 className="font-sans font-extrabold text-2xl md:text-3xl xl:text-4xl text-zinc-900 dark:text-white tracking-tight">
                         Atlas Intelligent Assistant
                       </h3>
-                      <p className="font-sans text-sm xl:text-base text-zinc-400 leading-relaxed font-light">
+                      <p className="font-sans text-sm xl:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
                         A real-time voice recognition assistant integrated with low-latency signal rendering. Designed to minimize browser layout overhead using direct Canvas memory context.
                       </p>
                       <div className="flex items-center gap-2 text-xs font-mono text-zinc-500">
@@ -882,10 +871,10 @@ export default function App() {
                         <div>
                           <div className="flex justify-between items-start mb-6">
                              <span className="font-mono text-[10px] xl:text-[11px] tracking-widest text-zinc-500 uppercase">AI Automation // Mobile Client</span>
-                             <span className="text-zinc-500 font-mono text-[10px] xl:text-[11px] bg-white/5 px-2 py-0.5 rounded-full border border-white/5">2025</span>
+                             <span className="text-zinc-500 font-mono text-[10px] xl:text-[11px] bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded-full border border-zinc-200 dark:border-white/5">2025</span>
                           </div>
-                          <h4 className="font-sans font-extrabold text-2xl xl:text-3xl 2xl:text-4xl text-white mb-3 group-hover:text-accent transition-colors duration-200">Atlas Voice Assistant</h4>
-                          <p className="font-sans text-sm xl:text-base 2xl:text-lg text-zinc-400 leading-relaxed font-light mb-6">
+                          <h4 className="font-sans font-extrabold text-2xl xl:text-3xl 2xl:text-4xl text-zinc-900 dark:text-white mb-3 group-hover:text-accent transition-colors duration-200">Atlas Voice Assistant</h4>
+                          <p className="font-sans text-sm xl:text-base 2xl:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light mb-6">
                             An AI-driven companion interpreting natural language, triggering responsive system operations, and featuring a real-time fluid waveform visualizer built with canvas rendering.
                           </p>
                         </div>
@@ -906,7 +895,7 @@ export default function App() {
                           </div>
                           <div className="flex flex-wrap gap-2 mb-6">
                             {['React Native', 'TypeScript', 'Web Speech API', 'Node.js', 'Framer Motion'].map((tag) => (
-                              <span key={tag} className="font-mono text-[9px] xl:text-[10px] text-zinc-400 bg-white/[0.03] px-2 py-1 rounded border border-white/5">{tag}</span>
+                              <span key={tag} className="font-mono text-[9px] xl:text-[10px] text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-white/[0.03] px-2 py-1 rounded border border-zinc-200 dark:border-white/5">{tag}</span>
                             ))}
                           </div>
                           <button 
@@ -915,7 +904,7 @@ export default function App() {
                               const proj = PROJECTS.find(p => p.id === "atlas-voice");
                               if (proj) setSelectedProject(proj);
                             }}
-                            className="inline-flex items-center gap-2 font-sans text-xs xl:text-sm 2xl:text-base font-bold text-accent hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer text-left"
+                            className="inline-flex items-center gap-2 font-sans text-xs xl:text-sm 2xl:text-base font-bold text-zinc-800 dark:text-accent hover:text-zinc-950 dark:hover:text-white transition-colors duration-200 focus:outline-none cursor-pointer text-left"
                           >
                             Explore Technical Solutions & Challenges
                             <svg className="w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -946,14 +935,14 @@ export default function App() {
                   <motion.div variants={staggerItem}>
                     <span className="font-mono text-xs xl:text-sm uppercase tracking-widest text-accent font-bold">
                        FULL STACK SKILLS
-                    </span>
+                     </span>
                   </motion.div>
 
                   <motion.div variants={staggerItem} className="space-y-6">
-                    <h3 className="font-sans font-extrabold text-3xl xl:text-4xl 2xl:text-5xl text-white tracking-tight">
+                    <h3 className="font-sans font-extrabold text-3xl xl:text-4xl 2xl:text-5xl text-zinc-900 dark:text-white tracking-tight">
                       Technical Capabilities & Tooling
                     </h3>
-                    <p className="font-sans text-sm xl:text-base 2xl:text-lg text-zinc-400 leading-relaxed font-light max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
+                    <p className="font-sans text-sm xl:text-base 2xl:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
                       Pragmatic engineering combined with visual detail. Here is a granular breakdown of my full stack proficiency, focusing on modern web ecosystem capabilities.
                     </p>
                   </motion.div>
@@ -975,11 +964,11 @@ export default function App() {
                         <div className="flex justify-between items-start mb-4">
                           <div className="space-y-1">
                             <span className="font-mono text-[9px] xl:text-[10px] tracking-widest text-accent uppercase font-bold">Client Side</span>
-                            <h4 className="font-sans font-bold text-lg xl:text-xl 2xl:text-2xl text-white">Frontend Architecture</h4>
+                            <h4 className="font-sans font-bold text-lg xl:text-xl 2xl:text-2xl text-zinc-900 dark:text-white">Frontend Architecture</h4>
                           </div>
-                          <span className="font-mono text-xs xl:text-sm text-zinc-500 font-semibold bg-white/5 px-2 py-0.5 rounded border border-white/5">95%</span>
+                          <span className="font-mono text-xs xl:text-sm text-zinc-500 font-semibold bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded border border-zinc-200 dark:border-white/5">95%</span>
                         </div>
-                        <p className="font-sans text-xs xl:text-sm 2xl:text-base text-zinc-400 mb-6 font-light">
+                        <p className="font-sans text-xs xl:text-sm 2xl:text-base text-zinc-600 dark:text-zinc-400 mb-6 font-light">
                           Specialized in designing highly reactive interfaces, fluid animations, modular design systems, and SEO-optimized web templates with strict web vitals performance tuning.
                         </p>
                         
@@ -992,29 +981,29 @@ export default function App() {
                           className="space-y-3"
                         >
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>React, Next.js, Vite & TS</span>
                               <span className="font-mono">Advanced</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[95%] rounded-full" />
                             </div>
                           </motion.div>
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>Tailwind CSS, motion & UI Systems</span>
                               <span className="font-mono">Expert</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[98%] rounded-full" />
                             </div>
                           </motion.div>
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>State Management (Zustand, Redux)</span>
                               <span className="font-mono">Advanced</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[90%] rounded-full" />
                             </div>
                           </motion.div>
@@ -1031,11 +1020,11 @@ export default function App() {
                         <div className="flex justify-between items-start mb-4">
                           <div className="space-y-1">
                             <span className="font-mono text-[9px] xl:text-[10px] tracking-widest text-accent uppercase font-bold">Server Side</span>
-                            <h4 className="font-sans font-bold text-lg xl:text-xl 2xl:text-2xl text-white">Backend Systems</h4>
+                            <h4 className="font-sans font-bold text-lg xl:text-xl 2xl:text-2xl text-zinc-900 dark:text-white">Backend Systems</h4>
                           </div>
-                          <span className="font-mono text-xs xl:text-sm text-zinc-500 font-semibold bg-white/5 px-2 py-0.5 rounded border border-white/5">90%</span>
+                          <span className="font-mono text-xs xl:text-sm text-zinc-500 font-semibold bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded border border-zinc-200 dark:border-white/5">90%</span>
                         </div>
-                        <p className="font-sans text-xs xl:text-sm 2xl:text-base text-zinc-400 mb-6 font-light">
+                        <p className="font-sans text-xs xl:text-sm 2xl:text-base text-zinc-600 dark:text-zinc-400 mb-6 font-light">
                           Structuring scalable server ecosystems, clean RESTful/GraphQL web service contracts, real-time message brokers, caching nodes, and reliable asynchronous job pipelines.
                         </p>
                         
@@ -1048,29 +1037,29 @@ export default function App() {
                           className="space-y-3"
                         >
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>Node.js, Express & NestJS</span>
                               <span className="font-mono">Advanced</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[92%] rounded-full" />
                             </div>
                           </motion.div>
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>Go (Golang) Microservices</span>
                               <span className="font-mono">Intermediate</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[78%] rounded-full" />
                             </div>
                           </motion.div>
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>APIs, Websockets & Authentication</span>
                               <span className="font-mono">Advanced</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[90%] rounded-full" />
                             </div>
                           </motion.div>
@@ -1087,11 +1076,11 @@ export default function App() {
                         <div className="flex justify-between items-start mb-4">
                           <div className="space-y-1">
                             <span className="font-mono text-[9px] xl:text-[10px] tracking-widest text-accent uppercase font-bold">Data Management</span>
-                            <h4 className="font-sans font-bold text-lg xl:text-xl 2xl:text-2xl text-white">Database & Cache Layer</h4>
+                            <h4 className="font-sans font-bold text-lg xl:text-xl 2xl:text-2xl text-zinc-900 dark:text-white">Database & Cache Layer</h4>
                           </div>
-                          <span className="font-mono text-xs xl:text-sm text-zinc-500 font-semibold bg-white/5 px-2 py-0.5 rounded border border-white/5">88%</span>
+                          <span className="font-mono text-xs xl:text-sm text-zinc-500 font-semibold bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded border border-zinc-200 dark:border-white/5">88%</span>
                         </div>
-                        <p className="font-sans text-xs xl:text-sm 2xl:text-base text-zinc-400 mb-6 font-light">
+                        <p className="font-sans text-xs xl:text-sm 2xl:text-base text-zinc-600 dark:text-zinc-400 mb-6 font-light">
                           Designing transactional relational models, optimized NoSQL storage schemas, database indices, analytical structures, and fast query pipelines with ORMs.
                         </p>
                         
@@ -1104,29 +1093,29 @@ export default function App() {
                           className="space-y-3"
                         >
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>PostgreSQL & SQL Query Optimization</span>
                               <span className="font-mono">Advanced</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[90%] rounded-full" />
                             </div>
                           </motion.div>
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>Redis & Memory Caching</span>
                               <span className="font-mono">Intermediate</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[82%] rounded-full" />
                             </div>
                           </motion.div>
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>MongoDB & Firestore (NoSQL)</span>
                               <span className="font-mono">Advanced</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[88%] rounded-full" />
                             </div>
                           </motion.div>
@@ -1143,11 +1132,11 @@ export default function App() {
                         <div className="flex justify-between items-start mb-4">
                           <div className="space-y-1">
                             <span className="font-mono text-[9px] xl:text-[10px] tracking-widest text-accent uppercase font-bold">Cloud Ops</span>
-                            <h4 className="font-sans font-bold text-lg xl:text-xl 2xl:text-2xl text-white">DevOps & Cloud Deploy</h4>
+                            <h4 className="font-sans font-bold text-lg xl:text-xl 2xl:text-2xl text-zinc-900 dark:text-white">DevOps & Cloud Deploy</h4>
                           </div>
-                          <span className="font-mono text-xs xl:text-sm text-zinc-500 font-semibold bg-white/5 px-2 py-0.5 rounded border border-white/5">85%</span>
+                          <span className="font-mono text-xs xl:text-sm text-zinc-500 font-semibold bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded border border-zinc-200 dark:border-white/5">85%</span>
                         </div>
-                        <p className="font-sans text-xs xl:text-sm 2xl:text-base text-zinc-400 mb-6 font-light">
+                        <p className="font-sans text-xs xl:text-sm 2xl:text-base text-zinc-600 dark:text-zinc-400 mb-6 font-light">
                           Deploying production builds using modern CI/CD orchestration, virtual container setups, load balancers, secure reverse-proxies, and standard serverless infrastructure.
                         </p>
                         
@@ -1160,29 +1149,29 @@ export default function App() {
                           className="space-y-3"
                         >
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>Docker Containerization</span>
                               <span className="font-mono">Advanced</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[90%] rounded-full" />
                             </div>
                           </motion.div>
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>GCP & AWS Serverless hosting</span>
                               <span className="font-mono">Intermediate</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[80%] rounded-full" />
                             </div>
                           </motion.div>
                           <motion.div variants={staggerItem}>
-                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-400 mb-1">
+                            <div className="flex justify-between text-[11px] xl:text-xs 2xl:text-sm font-sans text-zinc-600 dark:text-zinc-400 mb-1">
                               <span>GitHub Actions & CI/CD automation</span>
                               <span className="font-mono">Advanced</span>
                             </div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div className="h-1 bg-zinc-250 dark:bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full bg-accent w-[86%] rounded-full" />
                             </div>
                           </motion.div>

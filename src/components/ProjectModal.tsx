@@ -66,7 +66,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/70 dark:bg-black/90 backdrop-blur-md"
+            className="fixed inset-0 bg-black/40 dark:bg-black/85 backdrop-blur-md"
             id="modal-backdrop"
           />
 
@@ -222,12 +222,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     {project.challenges.map((item, index) => (
                       <div 
                         key={index} 
-                        className="bg-gray-50/50 dark:bg-[#141415] border border-gray-150 dark:border-zinc-800/60 p-6 rounded-xl space-y-4 relative overflow-hidden group hover:border-gray-200 dark:hover:border-zinc-700 transition-all duration-300"
+                        className="bg-gray-50/50 dark:bg-[#141415] border border-zinc-200/80 dark:border-zinc-800/60 p-6 rounded-xl space-y-4 relative overflow-hidden group hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300"
                       >
                         <div className="absolute top-0 left-0 w-1 h-full bg-accent opacity-60" />
                         
                         <div className="flex items-start gap-3">
-                          <span className="font-mono text-[9px] text-zinc-500 bg-gray-150 dark:bg-white/5 px-2 py-0.5 rounded border border-gray-200 dark:border-white/5">
+                          <span className="font-mono text-[9px] text-zinc-500 bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded border border-zinc-200 dark:border-white/5">
                             0{index + 1}
                           </span>
                           <h5 className="font-sans font-bold text-sm md:text-base text-black dark:text-white group-hover:text-accent transition-colors duration-200">

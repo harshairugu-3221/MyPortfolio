@@ -52,7 +52,7 @@ export default function ChromeAvatar() {
             rotateY,
             transformStyle: "preserve-3d",
           }}
-          className="relative w-[300px] h-[300px] flex items-center justify-center rounded-full bg-black/40 border border-white/[0.03] backdrop-blur-md shadow-[0_32px_64px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.05)]"
+          className="relative w-[300px] h-[300px] flex items-center justify-center rounded-full bg-black/10 dark:bg-black/40 border border-black/5 dark:border-white/[0.03] backdrop-blur-md shadow-[0_32px_64px_rgba(0,0,0,0.15),inset_0_1px_2px_rgba(255,255,255,0.4)] dark:shadow-[0_32px_64px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.05)]"
         >
           {/* Top physical edge glare of the glass case */}
           <div className="absolute inset-x-8 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />

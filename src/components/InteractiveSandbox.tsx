@@ -1225,32 +1225,32 @@ export default function InteractiveSandbox({ project }: InteractiveSandboxProps)
 
           {/* 7. NexCart Output */}
           {project.id === "nexcart" && (
-            <div className="w-full max-w-md bg-zinc-950 border border-zinc-850 p-4 rounded-lg shadow-2xl flex flex-col justify-between min-h-[340px]">
+            <div className="w-full max-w-md bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-850 p-4 rounded-lg shadow-2xl flex flex-col justify-between min-h-[340px]" id="sandbox-nexcart-panel">
               {/* Telemetry Header */}
-              <div className="flex items-center justify-between pb-2 border-b border-zinc-800/60 font-mono text-[8px] text-zinc-500">
+              <div className="flex items-center justify-between pb-2 border-b border-zinc-200 dark:border-zinc-800/60 font-mono text-[8px] text-zinc-500">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-zinc-800 dark:bg-accent animate-pulse" />
                   <span>NEX_GATEWAY_NODE // ADDR: 127.0.0.1:3000</span>
                 </div>
                 <span>SSL // SECURE</span>
               </div>
 
               {/* Live Terminal Log Stream */}
-              <div className="flex-1 my-3 bg-black/60 border border-zinc-900 rounded p-3 font-mono text-[10px] text-zinc-300 overflow-y-auto space-y-1.5 min-h-[160px] max-h-[180px] scrollbar-thin">
-                <div className="text-zinc-500 text-[9px] border-b border-zinc-900 pb-1 flex justify-between">
+              <div className="flex-1 my-3 bg-zinc-50 dark:bg-black/60 border border-zinc-200 dark:border-zinc-900 rounded p-3 font-mono text-[10px] text-zinc-700 dark:text-zinc-300 overflow-y-auto space-y-1.5 min-h-[160px] max-h-[180px] scrollbar-thin">
+                <div className="text-zinc-500 text-[9px] border-b border-zinc-200 dark:border-zinc-900 pb-1 flex justify-between">
                   <span>SYSTEM REAL-TIME STREAM LOGS</span>
                   <span>LINES: {nexLogs.length}</span>
                 </div>
                 {nexLogs.map((log, idx) => (
-                  <div key={idx} className={`leading-normal ${idx === 0 ? "text-accent" : log.includes("SUCCESS") || log.includes("matches") ? "text-emerald-400" : "text-zinc-400"}`}>
-                    <span className="text-zinc-600 select-none mr-2">&gt;</span>
+                  <div key={idx} className={`leading-normal ${idx === 0 ? "text-zinc-950 dark:text-accent font-bold" : log.includes("SUCCESS") || log.includes("matches") ? "text-emerald-600 dark:text-emerald-400" : "text-zinc-600 dark:text-zinc-400"}`}>
+                    <span className="text-zinc-400 dark:text-zinc-600 select-none mr-2">&gt;</span>
                     {log}
                   </div>
                 ))}
               </div>
 
               {/* Order Status Badge & Bill Summary */}
-              <div className="border-t border-zinc-900 pt-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+              <div className="border-t border-zinc-200 dark:border-zinc-900 pt-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
                 <div>
                   <span className="block font-mono text-[7px] uppercase tracking-wider text-zinc-500">Checkout Pipeline State</span>
                   <div className="flex items-center gap-1.5 mt-0.5">
@@ -1261,7 +1261,7 @@ export default function InteractiveSandbox({ project }: InteractiveSandboxProps)
                         ? "bg-amber-500 animate-pulse"
                         : "bg-zinc-600"
                     }`} />
-                    <span className="font-mono text-[10px] uppercase font-bold text-zinc-300">
+                    <span className="font-mono text-[10px] uppercase font-bold text-zinc-800 dark:text-zinc-300">
                       {nexPaymentStatus === "success"
                         ? "TX_COMMIT // DELIVERED"
                         : nexPaymentStatus === "processing"
@@ -1273,7 +1273,7 @@ export default function InteractiveSandbox({ project }: InteractiveSandboxProps)
 
                 <div className="text-right">
                   <span className="block font-mono text-[7px] uppercase tracking-wider text-zinc-500">Decoupled Telemetry</span>
-                  <span className="font-mono text-[10px] text-zinc-400 block mt-0.5">
+                  <span className="font-mono text-[10px] text-zinc-600 dark:text-zinc-400 block mt-0.5">
                     {nexPaymentStatus === "success" ? "DISPATCH_ID: SH-38501" : "AWAITING_PAYMENT_INTENT"}
                   </span>
                 </div>
@@ -1283,18 +1283,18 @@ export default function InteractiveSandbox({ project }: InteractiveSandboxProps)
 
           {/* 8. Atlas Voice Assistant Output */}
           {project.id === "atlas-voice" && (
-            <div className="w-full max-w-md bg-zinc-950 border border-zinc-850 p-4 rounded-lg shadow-2xl flex flex-col justify-between min-h-[340px]">
+            <div className="w-full max-w-md bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-850 p-4 rounded-lg shadow-2xl flex flex-col justify-between min-h-[340px]" id="sandbox-atlas-panel">
               {/* Assistant Header */}
-              <div className="flex items-center justify-between pb-2 border-b border-zinc-800/60 font-mono text-[8px] text-zinc-500">
+              <div className="flex items-center justify-between pb-2 border-b border-zinc-200 dark:border-zinc-800/60 font-mono text-[8px] text-zinc-500">
                 <div className="flex items-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${atlasListening ? "bg-rose-500 animate-ping" : "bg-accent"}`} />
+                  <span className={`w-2 h-2 rounded-full ${atlasListening ? "bg-rose-500 animate-ping" : "bg-zinc-800 dark:bg-accent"}`} />
                   <span>ATLAS // AUDIO MODULE CONTEXT</span>
                 </div>
                 <span>WAVE: ACTIVE</span>
               </div>
 
               {/* Animated Waveform Display */}
-              <div className="h-20 flex items-center justify-center gap-1 bg-black/40 border border-zinc-900 rounded my-3 overflow-hidden relative">
+              <div className="h-20 flex items-center justify-center gap-1 bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-zinc-900 rounded my-3 overflow-hidden relative">
                 {/* Simulated Waveform lines */}
                 {Array.from({ length: 24 }).map((_, i) => {
                   const delay = i * 0.05;
@@ -1310,7 +1310,7 @@ export default function InteractiveSandbox({ project }: InteractiveSandboxProps)
                         transition: "height 0.15s ease-in-out",
                         animation: atlasListening ? `atlasBounce ${duration}s ease-in-out ${delay}s infinite alternate` : "none"
                       }}
-                      className={`w-1 rounded-full ${atlasListening ? "bg-rose-500" : "bg-accent/40"}`}
+                      className={`w-1 rounded-full ${atlasListening ? "bg-rose-500" : "bg-zinc-300 dark:bg-accent/40"}`}
                     />
                   );
                 })}
@@ -1320,14 +1320,14 @@ export default function InteractiveSandbox({ project }: InteractiveSandboxProps)
                     100% { transform: scaleY(1.3); opacity: 1; }
                   }
                 `}</style>
-                <div className="absolute top-2 right-3 font-mono text-[6px] text-zinc-600 uppercase tracking-widest">
+                <div className="absolute top-2 right-3 font-mono text-[6px] text-zinc-400 dark:text-zinc-600 uppercase tracking-widest">
                   Live Spectrogram Output
                 </div>
               </div>
 
               {/* Speech Output Box */}
-              <div className="flex-1 bg-black/60 border border-zinc-900 rounded p-3 space-y-2 min-h-[100px]">
-                <div className="flex justify-between items-center border-b border-zinc-900 pb-1 font-mono text-[7px] text-zinc-600">
+              <div className="flex-1 bg-zinc-50 dark:bg-black/60 border border-zinc-200 dark:border-zinc-900 rounded p-3 space-y-2 min-h-[100px]">
+                <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-900 pb-1 font-mono text-[7px] text-zinc-500 dark:text-zinc-600">
                   <span>ATLAS COGNITIVE RESPONSE</span>
                   <span>{atlasListening ? "PROCESSING..." : "IDLE // READY"}</span>
                 </div>
@@ -1340,8 +1340,8 @@ export default function InteractiveSandbox({ project }: InteractiveSandboxProps)
                 ) : (
                   <div className="space-y-1.5 py-1">
                     <div className="flex gap-2 items-start">
-                      <MessageSquare className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
-                      <p className="font-sans text-xs text-zinc-200 leading-normal italic font-light">
+                      <MessageSquare className="w-3.5 h-3.5 text-zinc-800 dark:text-accent shrink-0 mt-0.5" />
+                      <p className="font-sans text-xs text-zinc-800 dark:text-zinc-200 leading-normal italic font-light">
                         "{atlasResponse}"
                       </p>
                     </div>
@@ -1350,11 +1350,11 @@ export default function InteractiveSandbox({ project }: InteractiveSandboxProps)
               </div>
 
               {/* Small Diagnostics Trace Box */}
-              <div className="mt-3 p-2 bg-black border border-zinc-900 rounded font-mono text-[8px] text-zinc-500 space-y-1 max-h-[50px] overflow-y-auto">
-                <span className="block text-zinc-600 uppercase border-b border-zinc-950 pb-0.5">DUMP TRACE_LOG</span>
+              <div className="mt-3 p-2 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-900 rounded font-mono text-[8px] text-zinc-500 space-y-1 max-h-[50px] overflow-y-auto">
+                <span className="block text-zinc-400 dark:text-zinc-600 uppercase border-b border-zinc-200 dark:border-zinc-950 pb-0.5">DUMP TRACE_LOG</span>
                 {atlasLogs.slice(0, 2).map((log, i) => (
                   <div key={i} className="truncate">
-                    <span className="text-zinc-700 mr-1">&gt;</span>
+                    <span className="text-zinc-400 dark:text-zinc-700 mr-1">&gt;</span>
                     {log}
                   </div>
                 ))}

@@ -52,7 +52,7 @@ export default function ExperienceSection() {
           >
             <TiltCard className="shadow-2xl z-10">
               <div className="p-8">
-                <p className="font-sans text-sm text-gray-300 leading-relaxed font-light">
+                <p className="font-sans text-sm text-zinc-600 dark:text-gray-300 leading-relaxed font-light">
                   Bridging classic Swiss modernist principles with state-of-the-art interactive digital formats. My philosophy is rooted in architectural honesty: creating visuals that serve their literal purpose with maximum typographical precision and spacious grids.
                 </p>
               </div>
@@ -89,7 +89,7 @@ export default function ExperienceSection() {
           {/* Right Column: Timeline Chronology */}
           <div className="lg:col-span-7 flex flex-col gap-10 relative">
             {/* Timeline connection bar */}
-            <div className="absolute left-4.5 top-2 bottom-2 w-[1px] bg-gray-100 dark:bg-white/5 pointer-events-none hidden md:block" />
+            <div className="absolute left-4.5 top-2 bottom-2 w-[1px] bg-zinc-200 dark:bg-white/5 pointer-events-none hidden md:block" />
 
             {EXPERIENCES.map((exp, index) => (
               <motion.div

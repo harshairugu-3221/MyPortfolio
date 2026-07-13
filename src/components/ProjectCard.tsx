@@ -67,7 +67,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect, index }) =
           transformStyle: "preserve-3d",
           boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 10px 30px -10px rgba(0, 0, 0, 0.95)",
         }}
-        className="relative aspect-4/3 w-full overflow-hidden bg-gray-100 dark:bg-[#0d0d0e]/95 border border-zinc-800/60 rounded-xl transition-[background-color,border-color,box-shadow] duration-200"
+        className="relative aspect-4/3 w-full overflow-hidden bg-gray-100 dark:bg-[#0d0d0e]/95 border border-zinc-200 dark:border-zinc-800/60 rounded-xl transition-[background-color,border-color,box-shadow] duration-200"
       >
         {/* Exact linear glare from physical top-edge of the container (matches the navbar) */}
         <div className="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none z-20" />

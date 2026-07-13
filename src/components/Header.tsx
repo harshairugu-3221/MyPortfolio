@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Sun, Moon } from "lucide-react";
+
 import { motion } from "motion/react";
 
 interface HeaderProps {
@@ -49,11 +49,15 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
       id="site-header"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "py-4 bg-[#0d0d0e]/95 backdrop-blur-md border-b border-zinc-800/60"
+          ? isDarkMode
+            ? "py-4 bg-[#0d0d0e]/95 backdrop-blur-md border-b border-zinc-800/60 text-white"
+            : "py-4 bg-white/95 backdrop-blur-md border-b border-zinc-200/80 text-zinc-900 shadow-sm"
           : "py-6 bg-transparent"
       }`}
       style={isScrolled ? {
-        boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 10px 30px -10px rgba(0, 0, 0, 0.95)"
+        boxShadow: isDarkMode 
+          ? "inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 10px 30px -10px rgba(0, 0, 0, 0.95)"
+          : "0 10px 30px -10px rgba(0, 0, 0, 0.05)"
       } : undefined}
     >
       <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] 3xl:max-w-[1600px] mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -73,30 +77,24 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
           id="header-brand"
           aria-label="Home"
         >
-          {/* High-Fidelity geometric 'H' SVG logo */}
+          {/* High-Fidelity geometric 'LH' monogram SVG logo */}
           <div className="flex items-center gap-3">
             <svg
-              className="h-10 w-auto transform group-hover:scale-105 transition-transform duration-300"
-              viewBox="0 0 100 80"
+              className={`h-10 w-auto transform group-hover:scale-105 transition-transform duration-300 ${(isDarkMode || !isScrolled) ? "text-white" : "text-zinc-900"}`}
+              viewBox="0 0 100 100"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Left vertical pillar with angled bottom edge */}
+              {/* Left angled stroke (L shape) */}
               <path
-                d="M38 12H46V72L38 62V12Z"
-                fill="white"
+                d="M 15 30 L 25 24.3 L 25 63.7 L 43 74 L 32.5 80 L 15 70 Z"
+                fill="currentColor"
                 className="transition-colors duration-300"
               />
-              {/* Right vertical pillar */}
+              {/* Middle & Right unified stroke (H shape with top-left flag/serif) */}
               <path
-                d="M56 4H64V60H56V4Z"
-                fill="white"
-                className="transition-colors duration-300"
-              />
-              {/* Elegant curved swoosh crossing the pillars with sharp arrowhead */}
-              <path
-                d="M16 52C28 38 52 32 78 32C60 35 40 42 31 60C28 66 32 76 39 70L28 58L16 52Z"
-                fill="white"
+                d="M 35 81.4 L 50 90 L 55 87.1 L 55 54 L 75 54 L 75 75.7 L 85 70 L 85 30 L 75 24.3 L 75 44 L 55 44 L 55 12.9 L 50 10 L 41 15.1 L 41 25 L 45 25 L 45 75.7 Z"
+                fill="currentColor"
                 className="transition-colors duration-300"
               />
             </svg>
@@ -107,10 +105,10 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
 
           {/* Typography block */}
           <div className="flex flex-col justify-center">
-            <span className="font-sans font-bold text-[26px] tracking-wide text-white leading-none">
+            <span className={`font-sans font-bold text-[26px] tracking-wide leading-none ${(isDarkMode || !isScrolled) ? "text-white" : "text-zinc-900"}`}>
               <span className="text-accent dark:text-accent font-extrabold">H</span>ARSHA
             </span>
-            <span className="font-sans text-[8px] tracking-[0.24em] font-extrabold text-zinc-400 uppercase mt-1.5 leading-none">
+            <span className={`font-sans text-[8px] tracking-[0.24em] font-extrabold uppercase mt-1.5 leading-none ${(isDarkMode || !isScrolled) ? "text-zinc-400" : "text-zinc-550"}`}>
               Full Stack Developer
             </span>
           </div>
@@ -120,22 +118,22 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
         <div className="flex items-center gap-8">
           {/* Navigation Items with matching fluid liquid metal pill capsule indicators */}
           <nav 
-            className="hidden md:flex items-center bg-[#0d0d0e]/95 border border-zinc-800/60 rounded-[18px] p-[4px] relative select-none"
+            className="hidden md:flex items-center bg-gradient-to-b from-zinc-900 via-zinc-950 to-black border border-zinc-800/80 rounded-[22px] p-[5px] relative select-none"
             style={{
-              boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 10px 30px -10px rgba(0, 0, 0, 0.95)"
+              boxShadow: "inset 0 1.5px 0px rgba(255, 255, 255, 0.18), inset 0 3px 6px rgba(255, 255, 255, 0.08), inset 0 -3px 8px rgba(0, 0, 0, 0.9), 0 16px 36px -12px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.02)"
             }}
           >
             {/* Elegant top edge linear glare */}
-            <div className="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-5 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
 
-             {navItems.map((item, index) => {
+            {navItems.map((item, index) => {
               const isActive = currentActive === item.id;
 
               return (
                 <React.Fragment key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
-                    className="relative flex items-center justify-center focus:outline-none cursor-pointer group h-[34px] w-[84px] rounded-[12px]"
+                    className="relative flex items-center justify-center focus:outline-none cursor-pointer group h-[34px] w-[84px] rounded-[14px]"
                     style={{ WebkitTapHighlightColor: "transparent" }}
                     aria-label={`Navigate to ${item.label}`}
                   >
@@ -143,9 +141,9 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
                     {isActive && (
                       <motion.div
                         layoutId="desktopLiquidMetalCapsule"
-                        className="absolute inset-0 rounded-[12px] p-[1.5px] overflow-hidden flex items-center justify-center z-0 pointer-events-none"
+                        className="absolute inset-0 rounded-[16px] p-[1.5px] overflow-hidden flex items-center justify-center z-0 pointer-events-none"
                         style={{
-                          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.8), inset 0 1px 0px rgba(255, 255, 255, 0.4)",
+                          boxShadow: "0 6px 14px rgba(0, 0, 0, 0.85), inset 0 1px 0px rgba(255, 255, 255, 0.45)",
                           willChange: "transform"
                         }}
                         transition={{
@@ -155,7 +153,7 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
                         }}
                       >
                         {/* Shadow Slot / Recessed physical bezel under the button */}
-                        <div className="absolute inset-0.5 rounded-[10px] bg-black/85 shadow-[inset_0_2px_4px_rgba(0,0,0,0.9),0_1px_1px_rgba(255,255,255,0.02)] -z-10" />
+                        <div className="absolute inset-0.5 rounded-[18px] -z-10 bg-black/85 shadow-[inset_0_2.5px_5px_rgba(0,0,0,0.95),0_1px_1px_rgba(255,255,255,0.03)]" />
 
                         {/* Infinite rotating liquid metal conic sheen */}
                         <motion.div
@@ -175,14 +173,14 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
 
                         {/* Dark tactile button cap nested inside the chromatic ring */}
                         <div 
-                          className="relative w-full h-full rounded-[10px] bg-[#141415] -z-10"
+                          className="relative w-full h-full rounded-[14px] -z-10 bg-[#141415]"
                           style={{
-                            boxShadow: "inset 0 1px 1.5px rgba(255, 255, 255, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.8), 0 1px 2px rgba(0, 0, 0, 0.4)"
+                            boxShadow: "inset 0 1px 1.5px rgba(255, 255, 255, 0.25), inset 0 -1.5px 2px rgba(0, 0, 0, 0.85), 0 1px 2.5px rgba(0, 0, 0, 0.55)"
                           }}
                         >
                           {/* Glass reflections */}
-                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none" />
-                          <div className="absolute top-0 left-0 w-full h-[50%] bg-gradient-to-b from-white/[0.06] to-transparent pointer-events-none" />
+                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
+                          <div className="absolute top-0 left-0 w-full h-[50%] bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none" />
                         </div>
                       </motion.div>
                     )}
@@ -191,8 +189,12 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
                     <span 
                       className={`relative z-10 font-sans text-[12px] font-semibold tracking-wide transition-colors duration-300 ${
                         isActive 
-                          ? "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" 
-                          : "text-zinc-400 group-hover:text-zinc-200"
+                          ? (isDarkMode || !isScrolled)
+                            ? "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" 
+                            : "text-zinc-950 font-bold"
+                          : (isDarkMode || !isScrolled)
+                            ? "text-zinc-400 group-hover:text-zinc-200"
+                            : "text-zinc-550 group-hover:text-zinc-900"
                       }`}
                     >
                       {item.label}
@@ -202,9 +204,9 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
                   {/* Vertical dividers */}
                   {index < navItems.length - 1 && (
                     <div 
-                      className="w-[1px] h-7 bg-gradient-to-b from-transparent via-zinc-600 to-transparent self-center pointer-events-none transition-opacity duration-300"
+                      className={`w-[1px] h-7 bg-gradient-to-b from-transparent self-center pointer-events-none transition-opacity duration-300 ${(isDarkMode || !isScrolled) ? "via-zinc-600" : "via-zinc-300"}`}
                       style={{
-                        opacity: (currentActive === item.id || currentActive === navItems[index + 1].id) ? 0.35 : 0.95
+                        opacity: (currentActive === item.id || currentActive === navItems[index + 1].id) ? 0.45 : 1.0
                       }}
                     />
                   )}
@@ -213,19 +215,7 @@ export default function Header({ isDarkMode, toggleTheme, activeSection, onNavCl
             })}
           </nav>
 
-          {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full border border-white/10 hover:border-white hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer"
-            aria-label="Toggle theme"
-            id="theme-toggle-desktop"
-          >
-            {isDarkMode ? (
-              <Sun className="w-4 h-4 text-yellow-400" />
-            ) : (
-              <Moon className="w-4 h-4 text-gray-300" />
-            )}
-          </button>
+
         </div>
       </div>
     </header>
