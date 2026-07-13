@@ -211,8 +211,21 @@ CMD ["node", "dist/server.cjs"]`
 ];
 
 const SectionDivider = () => (
-  <div className="w-full flex justify-center pointer-events-none select-none">
-    <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-600/60 to-transparent" />
+  <div className="w-full flex justify-center pointer-events-none select-none relative py-12">
+    {/* Dynamic border line featuring the exact chromatic colors of the active pill capsule border */}
+    <div 
+      className="w-[85%] max-w-5xl h-[1.5px] opacity-40 dark:opacity-50"
+      style={{
+        background: "linear-gradient(90deg, transparent 0%, #ffffff 10%, #cbd5e1 20%, #ffd700 35%, #ff007f 50%, #00f5d4 65%, #00bbf9 75%, #9b5de5 88%, transparent 100%)",
+      }}
+    />
+    {/* Subtle central ambient glow matching the chromatic colors */}
+    <div 
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-8 rounded-full blur-2xl pointer-events-none opacity-20 dark:opacity-25"
+      style={{
+        background: "linear-gradient(90deg, #ff007f 0%, #00f5d4 50%, #00bbf9 100%)"
+      }}
+    />
   </div>
 );
 
@@ -270,6 +283,24 @@ export default function App() {
       setShowIntro(false);
     }, 4000);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Force scroll to top and direct to home section on reload (mount)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Prevent the browser from restoring the scroll position on reload
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      
+      // Ensure we are fully scrolled to the top immediately on mount
+      window.scrollTo(0, 0);
+      
+      // Clear hash so it doesn't trigger anchor-scroll behaviors
+      if (window.location.hash) {
+        window.history.replaceState(null, "", window.location.pathname);
+      }
+    }
   }, []);
 
   // Mouse position and spring values for interactive liquid ripple in the intro water
