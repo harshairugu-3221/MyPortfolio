@@ -648,7 +648,7 @@ export default function App() {
                     {/* Shifted LinkedIn and GitHub Links with subtle scale-up on hover */}
                     <div className="flex items-center gap-6 pl-3 pt-1">
                       <motion.a
-                        href="https://github.com/harshairugu"
+                        href="https://github.com/harshairugu-3221"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.15, y: -2 }}
@@ -659,7 +659,7 @@ export default function App() {
                         <Github className="w-5.5 h-5.5" />
                       </motion.a>
                       <motion.a
-                        href="https://linkedin.com/in/harshairugu"
+                        href="https://www.linkedin.com/in/sai-harsha-irugu/"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.15, y: -2 }}

@@ -138,7 +138,7 @@ export const PROJECTS: Project[] = [
     tags: ["React", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Stripe", "Redis"],
     deliverables: ["Decentralized Cart Sync Protocol", "Materialized Views Filtering Engine", "Secure Stripe Transaction Webhook", "Automated Dispatch Telemetry"],
     demoType: "fullstack",
-    prototypeUrl: "https://github.com/harshairugu",
+    prototypeUrl: "https://github.com/harshairugu-3221",
     challenges: [
       {
         title: "Real-time Cart Synchronization across Multiple Devices & Tabs",
@@ -174,7 +174,7 @@ export const PROJECTS: Project[] = [
     tags: ["React Native", "TypeScript", "Web Speech API", "Node.js", "Framer Motion", "Canvas API"],
     deliverables: ["Low-latency Speech Recognition Pipeline", "Hardware-accelerated Waveform Render", "Context-Aware Sliding Memory Engine", "API Core Dispatch Middleware"],
     demoType: "fullstack",
-    prototypeUrl: "https://github.com/harshairugu",
+    prototypeUrl: "https://github.com/harshairugu-3221",
     challenges: [
       {
         title: "Native Audio Stream Latency and Keyword Detection",
@@ -237,17 +237,17 @@ export const EXPERIENCES: Experience[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: "GitHub",
-    url: "https://github.com/harshairugu",
+    url: "https://github.com/harshairugu-3221",
     icon: "Github"
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/harshairugu",
+    url: "https://www.linkedin.com/in/sai-harsha-irugu/",
     icon: "Linkedin"
   },
   {
     name: "Instagram",
-    url: "https://instagram.com/harsha_irugu",
+    url: "https://www.instagram.com/i_sai_harsha_1406/",
     icon: "Instagram"
   }
 ];
