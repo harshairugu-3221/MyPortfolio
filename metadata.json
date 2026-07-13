@@ -1,0 +1,6 @@
+{
+  "name": "Minimalist Design Portfolio",
+  "description": "A minimalist, responsive portfolio website for showcasing high-end graphic design work, featuring high-performance WebGL fluid background animations, dynamic animations, experience highlights, and accessible dark/light mode toggle.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
